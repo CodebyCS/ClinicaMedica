@@ -1,78 +1,107 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+## Ficha de Revisões e Preparação - UFCD 00607 - Desenvolver programas complexos em linguagem est.
+---
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+### Objetivo
+O seguinte trabalho prático consiste no desenvolvimento de uma aplicação WEB com implementação da Framework Laravel como base de desenvolvimento e arquitetura de software, aplicando todos os conhecimentos adquiridos. Este exercício foca-se num domínio de negócio diferente para testar a capacidade de abstração e modelação de bases de dados.
 
-## About Laravel
+### Contexto e Desenvolvimento
+Uma rede de Clínicas Médicas requisitou uma aplicação web para modernizar a gestão do seu atendimento diário. O sistema deverá ser capaz de gerir os **Pacientes**, o corpo clínico (**Médicos** e as suas **Especialidades**), as **Consultas** agendadas, e a prescrição de **Medicamentos** (produzidos por diferentes **Laboratórios**).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+A aplicação deverá gerir 6 entidades principais (Tabelas na Base de Dados):
+1. **specialties** (Especialidades Médicas)
+2. **laboratories** (Laboratórios Farmacêuticos)
+3. **doctors** (Médicos)
+4. **patients** (Pacientes)
+5. **medications** (Medicamentos)
+6. **appointments** (Consultas)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+#### O Sistema de Relações:
+* **1 para Muitos (1:N):**
+  * Uma **Especialidade** tem vários **Médicos** (Um Médico pertence a uma Especialidade).
+  * Um **Laboratório** produz vários **Medicamentos**.
+  * Um **Paciente** tem várias **Consultas**.
+  * Um **Médico** realiza várias **Consultas**.
+* **Muitos para Muitos (N:M):**
+  * Numa **Consulta** podem ser prescritos vários **Medicamentos**.
+  * Um **Medicamento** pode ser prescrito em várias **Consultas**.
+  * *(Isto obriga à criação de uma tabela Pivot para registar a prescrição).*
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+### O Trabalho Prático deverá conter os seguintes pontos:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. **Arquitetura Base:** Criação de uma aplicação Laravel com sistema de Autenticação (Auth) e integração de Bootstrap (ou Tailwind).
+2. **Master Page:** Definição de um *Layout* principal (Master Page) que inclua um menu de navegação responsivo para gerir todas as áreas da clínica.
+3. **Migrações e Modelos:** Criação de todas as *Migrations*, *Models* (no singular, ex: `Doctor`, `Appointment`) e respetivas relações no Eloquent para as 6 tabelas principais e para a tabela pivot.
+4. **Seeders:** 
+   * Uma *Seed* para a tabela **specialties**: *Cardiologia, Pediatria, Clínica Geral, Neurologia, Ortopedia*.
+   * Uma *Seed* para a tabela **laboratories**: *Bayer, Pfizer, Novartis, Roche*.
+5. **Factories:**
+   * Gerar 20 **patients** e 10 **doctors**.
+   * Gerar 50 **medications** (associados a um Laboratório).
+   * Gerar 30 **appointments** (associadas a um Paciente e a um Médico).
+   * *Desafio:* No Seeder principal, associar aleatoriamente 1 a 4 medicamentos a cada consulta gerada.
+6. **Views (Listagem e Detalhes):**
+   * Criar páginas de listagem para Médicos, Pacientes e Consultas usando tabelas HTML.
+   * Na listagem de Consultas, deve haver um botão para ver o "Detalhe da Consulta". Na view de detalhes, além da data e notas, deve aparecer o Paciente, o Médico, e uma lista com os Medicamentos prescritos nessa sessão.
+7. **CRUDs Completos:**
+   * Desenvolva o CRUD (Create, Read, Update, Delete) completo para **Doctors**, **Patients** e **Appointments**.
+   * Garanta que os formulários de criação usam *dropdowns* (`<select>`) para escolher as chaves estrangeiras (ex: escolher a Especialidade ao criar um Médico).
+8. **Validações:**
+   * **Paciente:** O número de utente (SNS) deve ter exatamente 9 dígitos e ser único. Email único e obrigatório.
+   * **Médico:** O número de cédula profissional deve ser único e obrigatório.
+   * **Consulta:** A data da consulta não pode estar vazia. Exibir as mensagens de erro nos formulários Blade.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+### Requisitos Mínimos das Tabelas e Campos:
+*(Nota: Os IDs e Timestamps devem ser criados com os métodos padrão de migração do Laravel: `id()` e `timestamps()`)*
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+**specialties** (Modelo: `Specialty`)
+* id
+* name
+* description (Opcional/Nullable)
+* timestamps
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+**laboratories** (Modelo: `Laboratory`)
+* id
+* name
+* contact_email
+* timestamps
 
-## Contributing
+**doctors** (Modelo: `Doctor`)
+* id
+* name
+* license_number (String, Único - Cédula Profissional)
+* specialty_id (FK ligada a specialties)
+* timestamps
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**patients** (Modelo: `Patient`)
+* id
+* name
+* email (Único)
+* sns_number (String, 9 dígitos, Único - Número de Utente)
+* birth_date (Date)
+* timestamps
 
-## Code of Conduct
+**medications** (Modelo: `Medication`)
+* id
+* name
+* active_ingredient (Princípio ativo)
+* laboratory_id (FK ligada a laboratories)
+* timestamps
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**appointments** (Modelo: `Appointment`)
+* id
+* appointment_date (DateTime)
+* clinical_notes (Text, Notas da consulta)
+* doctor_id (FK ligada a doctors)
+* patient_id (FK ligada a patients)
+* timestamps
 
-## Security Vulnerabilities
+**Tabela Pivot** (Para a prescrição de medicamentos nas consultas)
+* **appointment_medication**
+  * appointment_id (FK)
+  * medication_id (FK)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Bom trabalho**
