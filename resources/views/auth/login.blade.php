@@ -53,13 +53,15 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
+                                {{-- Envia o formulário de login. --}}
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                                    Entrar
                                 </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                {{-- Só apresenta o botão se a rota de registo existir. --}}
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="btn btn-outline-secondary ml-2">
+                                        Criar conta
                                     </a>
                                 @endif
                             </div>
