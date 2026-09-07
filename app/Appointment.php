@@ -13,6 +13,10 @@ class Appointment extends Model
         'patient_id',
     ];
 
+    protected $dates = [
+        'appointment_date',
+    ];
+
     //Uma consulta pertence a um médico
     public function doctor()
     {
