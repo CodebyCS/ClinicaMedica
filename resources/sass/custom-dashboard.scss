@@ -1,0 +1,356 @@
+/* Importação da fonte moderna */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+    --sidebar-bg: #043927;
+    --sidebar-hover: #074732;
+    --sidebar-active: #0c563d;
+    --primary-accent: #00a86b;
+    --primary-green: #043927;
+    --mint-badge: #e6f7f0;
+    --mint-text: #00875a;
+    --body-bg: #f8fafc;
+    --card-border: #edf2f7;
+    --text-main: #1a202c;
+    --text-muted: #718096;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--body-bg);
+    color: var(--text-main);
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Layout Geral do Dashboard */
+.dashboard-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Esquerda */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem 1rem;
+    flex-shrink: 0;
+}
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 2rem;
+    padding-left: 0.5rem;
+}
+
+.sidebar-logo .logo-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #34d399;
+}
+
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav .nav-item {
+    margin-bottom: 0.35rem;
+}
+
+.sidebar-nav .nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    color: #a7f3d0;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.sidebar-nav .nav-link:hover {
+    background-color: var(--sidebar-hover);
+    color: #fff;
+}
+
+.sidebar-nav .nav-link.active {
+    background-color: var(--sidebar-active);
+    color: #fff;
+    font-weight: 600;
+}
+
+.sidebar-nav .nav-link .active-dot {
+    width: 7px;
+    height: 7px;
+    background-color: #34d399;
+    border-radius: 50%;
+}
+
+.sidebar-user {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.15);
+    margin-top: auto;
+}
+
+.avatar-badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #0d5c41;
+    color: #34d399;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+}
+
+/* Área Principal */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* Topbar */
+.topbar {
+    height: 70px;
+    background: #fff;
+    border-bottom: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+.search-input-wrapper {
+    position: relative;
+    width: 420px;
+}
+
+.search-input-wrapper input {
+    width: 100%;
+    padding: 0.6rem 2.8rem 0.6rem 2.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background-color: #f8fafc;
+    font-size: 0.875rem;
+}
+
+.search-input-wrapper .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+}
+
+.search-input-wrapper .shortcut-badge {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    background: #edf2f7;
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: #718096;
+}
+
+/* Divisão do Conteúdo em Grade */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 1.5rem;
+    padding: 1.75rem 2rem;
+}
+
+/* Cards de Métricas */
+.kpi-card {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kpi-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #718096;
+    margin-bottom: 0.25rem;
+}
+
+.kpi-value {
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.kpi-trend-negative {
+    font-size: 0.8rem;
+    color: #e53e3e;
+    font-weight: 600;
+}
+
+.kpi-trend-positive {
+    font-size: 0.8rem;
+    color: #38a169;
+    font-weight: 600;
+}
+
+.kpi-icon-container {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #f0fdf4;
+    color: #10b981;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Toolbar da Agenda */
+.agenda-toolbar {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    margin-top: 1.25rem;
+}
+
+.btn-primary-dark {
+    background-color: #043927;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.6rem 1.25rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.btn-primary-dark:hover {
+    background-color: #064f36;
+    color: #fff;
+}
+
+/* Filtros Pill */
+.filter-pill-group {
+    display: inline-flex;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 10px;
+}
+
+.filter-pill-btn {
+    border: none;
+    background: transparent;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #64748b;
+    cursor: pointer;
+}
+
+.filter-pill-btn.active {
+    background: #fff;
+    color: #0f172a;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Grade de Horários */
+.schedule-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.schedule-table th,
+.schedule-table td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    border-right: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.schedule-table th:last-child,
+.schedule-table td:last-child {
+    border-right: none;
+}
+
+.slot-appointment {
+    border-left: 3px solid #10b981;
+    background: #fafdfb;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0 8px 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.slot-available {
+    color: #94a3b8;
+    font-style: italic;
+    font-size: 0.85rem;
+}
+
+/* Painel Lateral Direito (Lista de Pacientes) */
+.right-panel {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 1.5rem 1.25rem;
+    height: fit-content;
+}
+
+.patient-row-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0.5rem;
+    border-radius: 10px;
+    transition: background 0.15s ease;
+}
+
+.patient-row-item:hover,
+.patient-row-item.active-item {
+    background: #f0fdf4;
+}
