@@ -14,6 +14,10 @@ class Patient extends Model
         'birth_date'
     ];
 
+    protected $dates = [
+        'birth_date',
+    ];
+
     // Um paciente pode ter várias consultas
     public function appointments()
     {
