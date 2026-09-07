@@ -14,9 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return redirect()->route('appointments.index');
+})->middleware('auth');
 
 Auth::routes();
+
+Route::middleware('auth')->group(function (){
+   Route::resource('doctors', 'DoctorController');
+   Route::resource('patients', 'PatientController');
+    Route::resource('appointments', 'AppointmentController');
+
+});
+
 
 Route::get('/home', 'HomeController@index')->name('home');
