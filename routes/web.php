@@ -22,7 +22,7 @@ Auth::routes();
 Route::middleware('auth')->group(function (){
    Route::resource('doctors', 'DoctorController');
    Route::resource('patients', 'PatientController');
-    Route::resource('appointments', 'AppointmentController');
+   Route::resource('appointments', 'AppointmentController');
 
 });
 
