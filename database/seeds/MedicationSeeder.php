@@ -11,6 +11,6 @@ class MedicationSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(\App\Medication::class, 50)->create();
     }
 }

@@ -11,6 +11,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call([
+            SpecialtySeeder::class,
+            LaboratorySeeder::class,
+            DoctorSeeder::class,      // cria 10 médicos
+            PatientSeeder::class,     // cria 20 pacientes
+            MedicationSeeder::class,
+            AppointmentSeeder::class, // cria consultas por último
+            ]);
     }
 }
