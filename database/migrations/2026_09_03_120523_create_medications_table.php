@@ -15,7 +15,13 @@ class CreateMedicationsTable extends Migration
     {
         Schema::create('medications', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('active_ingredient');
+            $table->unsignedBigInteger('laboratory_id');
             $table->timestamps();
+
+            // FK
+            $table->foreign('laboratory_id')->references('id')->on('laboratories')->onDelete('cascade');
         });
     }
 

@@ -15,7 +15,13 @@ class CreateAppointmentMedicationTable extends Migration
     {
         Schema::create('appointment_medication', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('appointment_id');
+            $table->unsignedBigInteger('medication_id');
             $table->timestamps();
+
+            // FK
+            $table->foreign('appointment_id')->references('id')->on('appointments')->onDelete('cascade');
+            $table->foreign('medication_id')->references('id')->on('medications')->onDelete('cascade');
         });
     }
 

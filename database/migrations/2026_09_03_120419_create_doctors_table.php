@@ -15,7 +15,13 @@ class CreateDoctorsTable extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('license_number')->unique();
+            $table->unsignedBigInteger('specialty_id');
             $table->timestamps();
+
+            //FK
+            $table->foreign('specialty_id')->references('id')->on('specialties')->onDelete('cascade');
         });
     }
 
