@@ -11,6 +11,16 @@ class SpecialtySeeder extends Seeder
      */
     public function run()
     {
-        //
+        $specialties = [
+            ['name' => 'Cardiologia'],
+            ['name' => 'Pediatria'],
+            ['name' => 'Clínica Geral'],
+            ['name' => 'Neurologia'],
+            ['name' => 'Ortopedia']
+        ];
+
+        foreach ($specialties as $specialty){
+            \App\Specialty::create($specialty);
+        }
     }
 }
